@@ -92,8 +92,8 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
               set('membership_type', type);
               if (form.join_date) {
                 const d = new Date(form.join_date);
-                if (type === '月会員') { d.setMonth(d.getMonth() + 1); set('expiry_date', d.toISOString().slice(0, 10)); }
-                else if (type === '年会員') { d.setFullYear(d.getFullYear() + 1); set('expiry_date', d.toISOString().slice(0, 10)); }
+                if (type === '月会員') { d.setMonth(d.getMonth() + 1); d.setDate(d.getDate() - 1); set('expiry_date', d.toISOString().slice(0, 10)); }
+                else if (type === '年会員') { d.setFullYear(d.getFullYear() + 1); d.setDate(d.getDate() - 1); set('expiry_date', d.toISOString().slice(0, 10)); }
                 else { set('expiry_date', ''); }
               }
             }}>
@@ -108,8 +108,8 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
               const d = new Date(e.target.value);
               set('join_date', e.target.value);
               if (e.target.value) {
-                if (form.membership_type === '月会員') { d.setMonth(d.getMonth() + 1); set('expiry_date', d.toISOString().slice(0, 10)); }
-                else if (form.membership_type === '年会員') { d.setFullYear(d.getFullYear() + 1); set('expiry_date', d.toISOString().slice(0, 10)); }
+                if (form.membership_type === '月会員') { d.setMonth(d.getMonth() + 1); d.setDate(d.getDate() - 1); set('expiry_date', d.toISOString().slice(0, 10)); }
+                else if (form.membership_type === '年会員') { d.setFullYear(d.getFullYear() + 1); d.setDate(d.getDate() - 1); set('expiry_date', d.toISOString().slice(0, 10)); }
                 else { set('expiry_date', ''); }
               }
             }} />
