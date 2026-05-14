@@ -37,7 +37,7 @@ export default function DashboardPage() {
         </div>
         <div className={`rounded-xl shadow-sm border p-5 text-center ${data.expiring > 0 ? 'bg-yellow-50 border-yellow-200' : 'bg-white border-gray-100'}`}>
           <div className={`text-3xl font-bold ${data.expiring > 0 ? 'text-yellow-600' : 'text-gray-400'}`}>{data.expiring}</div>
-          <div className="text-sm text-gray-500 mt-1">30日以内に期限切れ</div>
+          <div className="text-sm text-gray-500 mt-1">1週間以内に期限切れ</div>
         </div>
       </div>
 
@@ -45,7 +45,7 @@ export default function DashboardPage() {
         {/* 期限切れ間近 */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
           <h2 className="text-sm font-bold text-yellow-600 mb-3 flex items-center gap-2">
-            ⏰ 期限切れ間近（30日以内）
+            ⏰ 期限切れ間近（1週間以内）
             <span className="bg-yellow-100 text-yellow-700 text-xs px-2 py-0.5 rounded-full">{data.expiring}件</span>
           </h2>
           {data.expiringList.length === 0 ? (

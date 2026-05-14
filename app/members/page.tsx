@@ -24,7 +24,7 @@ function StatusBadge({ expiry }: { expiry: string }) {
   if (!expiry) return <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">期限なし</span>;
   const d = daysUntil(expiry);
   if (d < 0) return <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium">期限切れ</span>;
-  if (d <= 30) return <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">残{d}日</span>;
+  if (d <= 7) return <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">残{d}日</span>;
   return <span className="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">有効</span>;
 }
 
@@ -74,7 +74,7 @@ export default function MembersPage() {
         >
           <option value="">すべて</option>
           <option value="active">有効</option>
-          <option value="expiring">30日以内に期限切れ</option>
+          <option value="expiring">1週間以内に期限切れ</option>
           <option value="expired">期限切れ</option>
         </select>
         <span className="text-sm text-gray-500 self-center">{members.length} 件</span>

@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
   if (status === 'expired') {
     query += ` AND m.expiry_date < CURRENT_DATE::TEXT`;
   } else if (status === 'expiring') {
-    query += ` AND m.expiry_date BETWEEN CURRENT_DATE::TEXT AND (CURRENT_DATE + INTERVAL '30 days')::TEXT`;
+    query += ` AND m.expiry_date BETWEEN CURRENT_DATE::TEXT AND (CURRENT_DATE + INTERVAL '7 days')::TEXT`;
   } else if (status === 'active') {
     query += ` AND (m.expiry_date IS NULL OR m.expiry_date >= CURRENT_DATE::TEXT)`;
   }

@@ -8,13 +8,13 @@ export async function GET() {
   const [total, expired, expiring, expiringList, expiredList, recentVisits] = await Promise.all([
     pool.query(`SELECT COUNT(*) as cnt FROM children`),
     pool.query(`SELECT COUNT(*) as cnt FROM memberships WHERE expiry_date < CURRENT_DATE::TEXT`),
-    pool.query(`SELECT COUNT(*) as cnt FROM memberships WHERE expiry_date BETWEEN CURRENT_DATE::TEXT AND (CURRENT_DATE + INTERVAL '30 days')::TEXT`),
+    pool.query(`SELECT COUNT(*) as cnt FROM memberships WHERE expiry_date BETWEEN CURRENT_DATE::TEXT AND (CURRENT_DATE + INTERVAL '7 days')::TEXT`),
     pool.query(`
       SELECT c.id, c.last_name, c.first_name, c.nickname, m.expiry_date, m.membership_type, g.mobile_phone
       FROM children c
       JOIN memberships m ON m.child_id = c.id
       LEFT JOIN guardians g ON g.child_id = c.id
-      WHERE m.expiry_date BETWEEN CURRENT_DATE::TEXT AND (CURRENT_DATE + INTERVAL '30 days')::TEXT
+      WHERE m.expiry_date BETWEEN CURRENT_DATE::TEXT AND (CURRENT_DATE + INTERVAL '7 days')::TEXT
       ORDER BY m.expiry_date
     `),
     pool.query(`
