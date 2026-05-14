@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { db, initSchema } from '@/lib/db';
 
 export async function GET() {
+  try {
   await initSchema();
   const pool = db();
 
@@ -43,4 +44,8 @@ export async function GET() {
     expiredList: expiredList.rows,
     recentVisits: recentVisits.rows,
   });
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return NextResponse.json({ error: msg }, { status: 500 });
+  }
 }
