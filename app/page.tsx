@@ -75,35 +75,6 @@ export default function DashboardPage() {
           )}
         </div>
 
-        {/* 期限切れ */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-          <h2 className="text-sm font-bold text-red-500 mb-3 flex items-center gap-2">
-            ❌ 期限切れ会員
-            <span className="bg-red-100 text-red-600 text-xs px-2 py-0.5 rounded-full">{data.expired}件</span>
-          </h2>
-          {data.expiredList.length === 0 ? (
-            <p className="text-gray-400 text-sm text-center py-4">該当なし</p>
-          ) : (
-            <div className="space-y-2">
-              {data.expiredList.map(m => (
-                <Link key={m.id} href={`/members/${m.id}`} className="flex items-center justify-between p-2 rounded-lg hover:bg-red-50 transition group">
-                  <div>
-                    <span className="text-sm font-medium text-gray-800 group-hover:text-red-600">
-                      {m.last_name} {m.first_name}
-                    </span>
-                    {m.nickname && <span className="text-xs text-gray-400 ml-1">（{m.nickname}）</span>}
-                    <div className="text-xs text-gray-400">{m.mobile_phone}</div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-xs text-red-500 font-medium">{m.membership_type}</div>
-                    <div className="text-xs text-gray-400">{m.expiry_date}</div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-
         {/* 最近の来所記録 */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 md:col-span-2">
           <h2 className="text-sm font-bold text-pink-600 mb-3">📅 最近の来所記録</h2>
