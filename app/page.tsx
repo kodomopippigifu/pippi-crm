@@ -39,10 +39,6 @@ export default function DashboardPage() {
           <div className={`text-3xl font-bold ${data.expiring > 0 ? 'text-yellow-600' : 'text-gray-400'}`}>{data.expiring}</div>
           <div className="text-sm text-gray-500 mt-1">30日以内に期限切れ</div>
         </div>
-        <div className={`rounded-xl shadow-sm border p-5 text-center ${data.expired > 0 ? 'bg-red-50 border-red-200' : 'bg-white border-gray-100'}`}>
-          <div className={`text-3xl font-bold ${data.expired > 0 ? 'text-red-500' : 'text-gray-400'}`}>{data.expired}</div>
-          <div className="text-sm text-gray-500 mt-1">期限切れ</div>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
