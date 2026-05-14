@@ -2,6 +2,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+function fmt(y: number, m: number, d: number): string {
+  return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+}
+
 function calcExpiry(startStr: string, type: string): string {
   if (!startStr) return '';
   const s = new Date(startStr + 'T00:00:00');
@@ -10,9 +14,10 @@ function calcExpiry(startStr: string, type: string): string {
   else if (type === '年会員') { y += 1; }
   else return '';
   const lastDay = new Date(y, m + 1, 0).getDate();
-  const d = s.getDate();
-  if (d > lastDay) return new Date(y, m, lastDay).toISOString().slice(0, 10);
-  return new Date(y, m, d - 1).toISOString().slice(0, 10);
+  const startDay = s.getDate();
+  if (startDay > lastDay) return fmt(y, m, lastDay);
+  const prev = new Date(y, m, startDay - 1);
+  return fmt(prev.getFullYear(), prev.getMonth(), prev.getDate());
 }
 
 interface FamilyMember { name: string; relationship: string; birth_date: string; age: string; occupation: string }
