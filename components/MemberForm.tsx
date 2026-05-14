@@ -145,7 +145,7 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div>
             <label className={labelCls}>家での呼び名</label>
-            <input className={inputCls} value={form.nickname} onChange={e => set('nickname', e.target.value)} placeholder="かんちゃん" />
+            <input className={inputCls} value={form.nickname} onChange={e => set('nickname', e.target.value)} placeholder="" />
           </div>
           <div>
             <label className={labelCls}>生年月日</label>
@@ -255,7 +255,7 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className={labelCls}>病院名</label>
-            <input className={inputCls} value={form.hospital_name} onChange={e => set('hospital_name', e.target.value)} placeholder="いのうえ小児科" />
+            <input className={inputCls} value={form.hospital_name} onChange={e => set('hospital_name', e.target.value)} placeholder="こども小児科" />
           </div>
           <div>
             <label className={labelCls}>電話番号</label>
