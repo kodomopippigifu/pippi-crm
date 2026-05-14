@@ -27,7 +27,7 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold text-gray-800 mb-5">ダッシュボード</h1>
+      <h1 className="text-xl font-bold text-gray-800 mb-5">ホーム</h1>
 
       {/* サマリーカード */}
       <div className="grid grid-cols-3 gap-4 mb-6">

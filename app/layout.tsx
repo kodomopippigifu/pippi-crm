@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               🌸 ピッピ 会員管理
             </Link>
             <div className="flex gap-4 text-sm font-medium">
-              <Link href="/" className="hover:bg-pink-600 px-3 py-1 rounded transition">ダッシュボード</Link>
+              <Link href="/" className="hover:bg-pink-600 px-3 py-1 rounded transition">ホーム</Link>
               <Link href="/members" className="hover:bg-pink-600 px-3 py-1 rounded transition">会員一覧</Link>
               <Link href="/members/new" className="bg-white text-pink-600 px-3 py-1 rounded hover:bg-pink-50 transition">＋ 新規登録</Link>
             </div>
