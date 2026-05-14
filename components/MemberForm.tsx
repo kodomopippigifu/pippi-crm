@@ -2,6 +2,19 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+function calcExpiry(startStr: string, type: string): string {
+  if (!startStr) return '';
+  const s = new Date(startStr + 'T00:00:00');
+  let y = s.getFullYear(), m = s.getMonth();
+  if (type === '月会員') { m += 1; if (m > 11) { m = 0; y += 1; } }
+  else if (type === '年会員') { y += 1; }
+  else return '';
+  const lastDay = new Date(y, m + 1, 0).getDate();
+  const d = s.getDate();
+  if (d > lastDay) return new Date(y, m, lastDay).toISOString().slice(0, 10);
+  return new Date(y, m, d - 1).toISOString().slice(0, 10);
+}
+
 interface FamilyMember { name: string; relationship: string; birth_date: string; age: string; occupation: string }
 interface EmergencyContact { order_num: number; name: string; phone: string }
 
@@ -90,12 +103,7 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
             <select className={inputCls} value={form.membership_type} onChange={e => {
               const type = e.target.value;
               set('membership_type', type);
-              if (form.join_date) {
-                const d = new Date(form.join_date);
-                if (type === '月会員') { d.setMonth(d.getMonth() + 1); d.setDate(d.getDate() - 1); set('expiry_date', d.toISOString().slice(0, 10)); }
-                else if (type === '年会員') { d.setFullYear(d.getFullYear() + 1); d.setDate(d.getDate() - 1); set('expiry_date', d.toISOString().slice(0, 10)); }
-                else { set('expiry_date', ''); }
-              }
+              set('expiry_date', calcExpiry(form.join_date, type));
             }}>
               <option>月会員</option>
               <option>年会員</option>
@@ -105,13 +113,8 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
           <div>
             <label className={labelCls}>開始日</label>
             <input type="date" className={inputCls} value={form.join_date} onChange={e => {
-              const d = new Date(e.target.value);
               set('join_date', e.target.value);
-              if (e.target.value) {
-                if (form.membership_type === '月会員') { d.setMonth(d.getMonth() + 1); d.setDate(d.getDate() - 1); set('expiry_date', d.toISOString().slice(0, 10)); }
-                else if (form.membership_type === '年会員') { d.setFullYear(d.getFullYear() + 1); d.setDate(d.getDate() - 1); set('expiry_date', d.toISOString().slice(0, 10)); }
-                else { set('expiry_date', ''); }
-              }
+              set('expiry_date', calcExpiry(e.target.value, form.membership_type));
             }} />
           </div>
           <div>
