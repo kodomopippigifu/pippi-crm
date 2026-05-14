@@ -86,20 +86,37 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
         <h2 className="text-base font-bold text-pink-600 mb-3 border-b border-pink-100 pb-2">📋 入会情報</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div>
-            <label className={labelCls}>入会日</label>
-            <input type="date" className={inputCls} value={form.join_date} onChange={e => set('join_date', e.target.value)} />
-          </div>
-          <div>
             <label className={labelCls}>会員種別</label>
-            <select className={inputCls} value={form.membership_type} onChange={e => set('membership_type', e.target.value)}>
+            <select className={inputCls} value={form.membership_type} onChange={e => {
+              const type = e.target.value;
+              set('membership_type', type);
+              if (form.join_date) {
+                const d = new Date(form.join_date);
+                if (type === '月会員') { d.setMonth(d.getMonth() + 1); set('expiry_date', d.toISOString().slice(0, 10)); }
+                else if (type === '年会員') { d.setFullYear(d.getFullYear() + 1); set('expiry_date', d.toISOString().slice(0, 10)); }
+                else { set('expiry_date', ''); }
+              }
+            }}>
               <option>月会員</option>
               <option>年会員</option>
               <option>ビジター</option>
             </select>
           </div>
           <div>
-            <label className={labelCls}>有効期限</label>
-            <input type="date" className={inputCls} value={form.expiry_date} onChange={e => set('expiry_date', e.target.value)} />
+            <label className={labelCls}>開始日</label>
+            <input type="date" className={inputCls} value={form.join_date} onChange={e => {
+              const d = new Date(e.target.value);
+              set('join_date', e.target.value);
+              if (e.target.value) {
+                if (form.membership_type === '月会員') { d.setMonth(d.getMonth() + 1); set('expiry_date', d.toISOString().slice(0, 10)); }
+                else if (form.membership_type === '年会員') { d.setFullYear(d.getFullYear() + 1); set('expiry_date', d.toISOString().slice(0, 10)); }
+                else { set('expiry_date', ''); }
+              }
+            }} />
+          </div>
+          <div>
+            <label className={labelCls}>有効期限（自動）</label>
+            <input type="date" className={inputCls + ' bg-gray-50 text-gray-500'} value={form.expiry_date} onChange={e => set('expiry_date', e.target.value)} />
           </div>
         </div>
       </div>

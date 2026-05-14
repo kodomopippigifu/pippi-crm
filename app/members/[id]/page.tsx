@@ -131,7 +131,15 @@ export default function MemberDetailPage() {
           <h2 className="text-sm font-bold text-pink-600 mb-3 border-b border-pink-100 pb-2">👶 お子様情報</h2>
           <InfoRow label="氏名" value={`${child.last_name} ${child.first_name}`} />
           <InfoRow label="ふりがな" value={`${child.last_name_kana || ''} ${child.first_name_kana || ''}`} />
-          <InfoRow label="生年月日" value={child.birth_date} />
+          <div className="info-row flex py-1.5 border-b border-gray-50 items-center">
+            <span className="info-label text-xs text-gray-500 w-28 shrink-0">生年月日</span>
+            <span className="text-sm text-gray-800 flex items-center gap-1.5">
+              {child.birth_date || '—'}
+              {child.birth_date && new Date(child.birth_date).getMonth() === new Date().getMonth() && (
+                <span className="animate-pulse font-bold" style={{filter:'drop-shadow(0 0 8px #f59e0b) drop-shadow(0 0 16px #fbbf24)', fontSize:'1.1rem'}}>🎂</span>
+              )}
+            </span>
+          </div>
           <InfoRow label="性別" value={child.gender} />
           <InfoRow label="血液型" value={child.blood_type} />
           <InfoRow label="家での呼び名" value={child.nickname} />

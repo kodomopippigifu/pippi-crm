@@ -9,6 +9,11 @@ interface Member {
   mobile_phone: string; address: string; guardian_last: string; guardian_first: string;
 }
 
+function isBirthdayMonth(birthDate: string): boolean {
+  if (!birthDate) return false;
+  return new Date(birthDate).getMonth() === new Date().getMonth();
+}
+
 function daysUntil(dateStr: string): number {
   if (!dateStr) return Infinity;
   const diff = new Date(dateStr).getTime() - new Date().setHours(0,0,0,0);
@@ -98,11 +103,17 @@ export default function MembersPage() {
               {members.map((m, i) => (
                 <tr key={m.id} className={`border-t border-gray-50 hover:bg-pink-50/30 transition ${i % 2 === 0 ? '' : 'bg-gray-50/30'}`}>
                   <td className="px-4 py-3">
-                    <Link href={`/members/${m.id}`} className="font-medium text-pink-600 hover:underline">
-                      {m.last_name} {m.first_name}
-                    </Link>
-                    {m.nickname && <span className="text-gray-400 text-xs ml-1">（{m.nickname}）</span>}
+                    <div className="flex items-center gap-1.5">
+                      <Link href={`/members/${m.id}`} className="font-medium text-pink-600 hover:underline">
+                        {m.last_name} {m.first_name}
+                      </Link>
+                      {isBirthdayMonth(m.birth_date) && (
+                        <span className="text-base animate-pulse" style={{filter:'drop-shadow(0 0 6px #f59e0b) drop-shadow(0 0 12px #fbbf24)'}} title="誕生月🎂">🎂</span>
+                      )}
+                    </div>
+                    {m.nickname && <span className="text-gray-400 text-xs">（{m.nickname}）</span>}
                     {m.last_name_kana && <div className="text-xs text-gray-400">{m.last_name_kana} {m.first_name_kana}</div>}
+                    {m.birth_date && <div className="text-xs text-gray-400">{m.birth_date.slice(0,7).replace('-','年')}月生</div>}
                   </td>
                   <td className="px-4 py-3 text-gray-600">{m.guardian_last} {m.guardian_first}</td>
                   <td className="px-4 py-3">
