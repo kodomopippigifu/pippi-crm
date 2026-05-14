@@ -1,26 +1,112 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  nav,
+  .print-hide {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    font-size: 9pt;
+    color: #000;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 印刷用タイトル */
+  .print-title {
+    font-size: 13pt;
+    font-weight: bold;
+    margin-bottom: 6pt;
+    display: block;
+  }
+
+  /* カード */
+  .print-card {
+    border: 1px solid #bbb !important;
+    box-shadow: none !important;
+    border-radius: 3pt !important;
+    padding: 5pt 7pt !important;
+    margin-bottom: 5pt !important;
+    break-inside: avoid;
+    background: white !important;
+  }
+
+  /* 2カラムグリッド */
+  .print-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5pt !important;
+    margin-bottom: 5pt !important;
+  }
+
+  /* セクション見出し */
+  .print-card h2 {
+    font-size: 9pt !important;
+    font-weight: bold !important;
+    color: #c2185b !important;
+    border-bottom: 1px solid #f8bbd0 !important;
+    padding-bottom: 2pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  /* InfoRow */
+  .info-row {
+    display: flex !important;
+    padding: 1.5pt 0 !important;
+    border-bottom: 1px solid #f5f5f5 !important;
+    font-size: 8.5pt !important;
+    line-height: 1.4 !important;
+  }
+  .info-row:last-child {
+    border-bottom: none !important;
+  }
+  .info-label {
+    width: 68pt !important;
+    flex-shrink: 0 !important;
+    color: #555 !important;
+    font-size: 8pt !important;
+  }
+
+  /* バナー */
+  .alert-banner {
+    border: 1px solid #888 !important;
+    background: white !important;
+    padding: 3pt 6pt !important;
+    margin-bottom: 4pt !important;
+    font-size: 8.5pt !important;
+    border-radius: 2pt !important;
+  }
+
+  /* 家族テーブル */
+  .print-card table {
+    width: 100% !important;
+    font-size: 8pt !important;
+    border-collapse: collapse !important;
+  }
+  .print-card table th,
+  .print-card table td {
+    padding: 2pt 3pt !important;
+    border-bottom: 1px solid #eee !important;
+    text-align: left !important;
+  }
 }
