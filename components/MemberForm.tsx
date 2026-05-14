@@ -110,19 +110,19 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
           <div>
             <label className={labelCls}>姓 <span className="text-red-500">*</span></label>
-            <input className={inputCls} value={form.last_name} onChange={e => set('last_name', e.target.value)} placeholder="足立" />
+            <input className={inputCls} value={form.last_name} onChange={e => set('last_name', e.target.value)} placeholder="子供" />
           </div>
           <div>
             <label className={labelCls}>名 <span className="text-red-500">*</span></label>
-            <input className={inputCls} value={form.first_name} onChange={e => set('first_name', e.target.value)} placeholder="奏向" />
+            <input className={inputCls} value={form.first_name} onChange={e => set('first_name', e.target.value)} placeholder="太郎" />
           </div>
           <div>
             <label className={labelCls}>姓（ふりがな）</label>
-            <input className={inputCls} value={form.last_name_kana} onChange={e => set('last_name_kana', e.target.value)} placeholder="あだち" />
+            <input className={inputCls} value={form.last_name_kana} onChange={e => set('last_name_kana', e.target.value)} placeholder="こども" />
           </div>
           <div>
             <label className={labelCls}>名（ふりがな）</label>
-            <input className={inputCls} value={form.first_name_kana} onChange={e => set('first_name_kana', e.target.value)} placeholder="かなた" />
+            <input className={inputCls} value={form.first_name_kana} onChange={e => set('first_name_kana', e.target.value)} placeholder="たろう" />
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -160,11 +160,11 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
           <div>
             <label className={labelCls}>姓</label>
-            <input className={inputCls} value={form.guardian.last_name} onChange={e => setGuardian('last_name', e.target.value)} placeholder="足立" />
+            <input className={inputCls} value={form.guardian.last_name} onChange={e => setGuardian('last_name', e.target.value)} placeholder="子供" />
           </div>
           <div>
             <label className={labelCls}>名</label>
-            <input className={inputCls} value={form.guardian.first_name} onChange={e => setGuardian('first_name', e.target.value)} placeholder="さくら" />
+            <input className={inputCls} value={form.guardian.first_name} onChange={e => setGuardian('first_name', e.target.value)} placeholder="太郎" />
           </div>
           <div>
             <label className={labelCls}>性別</label>
@@ -179,7 +179,7 @@ export default function MemberForm({ initial, memberId }: { initial?: Partial<Fo
         </div>
         <div className="mb-3">
           <label className={labelCls}>住所</label>
-          <input className={inputCls} value={form.guardian.address} onChange={e => setGuardian('address', e.target.value)} placeholder="羽島市小熊町内栗野3-58-2" />
+          <input className={inputCls} value={form.guardian.address} onChange={e => setGuardian('address', e.target.value)} placeholder="大垣市" />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
