@@ -6,8 +6,12 @@ const pool = new Pool({
   max: 10,
 });
 
+// Promise を使って並行リクエストでも1回だけ実行を保証
+let schemaPromise: Promise<void> | null = null;
+
 export async function initSchema() {
-  await pool.query(`
+  if (schemaPromise) return schemaPromise;
+  schemaPromise = pool.query(`
     CREATE TABLE IF NOT EXISTS children (
       id SERIAL PRIMARY KEY,
       last_name TEXT NOT NULL,
@@ -86,7 +90,8 @@ export async function initSchema() {
       content TEXT,
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
-  `);
+  `).then(() => undefined);
+  return schemaPromise;
 }
 
 export function db() {
