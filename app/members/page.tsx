@@ -39,9 +39,15 @@ export default function MembersPage() {
 
   const loadAll = async () => {
     setLoading(true);
-    const res = await fetch('/api/members');
-    setAllMembers(await res.json());
-    setLoading(false);
+    try {
+      const res = await fetch('/api/members');
+      const data = await res.json();
+      setAllMembers(Array.isArray(data) ? data : []);
+    } catch {
+      setAllMembers([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { loadAll(); }, []);
