@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 
 interface Member {
@@ -28,28 +28,48 @@ function StatusBadge({ expiry }: { expiry: string }) {
   return <span className="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">有効</span>;
 }
 
+const today = new Date().toISOString().slice(0, 10);
+const in7days = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
+
 export default function MembersPage() {
-  const [members, setMembers] = useState<Member[]>([]);
+  const [allMembers, setAllMembers] = useState<Member[]>([]);
   const [q, setQ] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const fetch_ = useCallback(async () => {
+  const loadAll = async () => {
     setLoading(true);
-    const params = new URLSearchParams();
-    if (q) params.set('q', q);
-    if (statusFilter) params.set('status', statusFilter);
-    const res = await fetch(`/api/members?${params}`);
-    setMembers(await res.json());
+    const res = await fetch('/api/members');
+    setAllMembers(await res.json());
     setLoading(false);
-  }, [q, statusFilter]);
+  };
 
-  useEffect(() => { fetch_(); }, [fetch_]);
+  useEffect(() => { loadAll(); }, []);
+
+  // クライアント側でフィルタリング（即時・ネットワーク不要）
+  const members = useMemo(() => {
+    let list = allMembers;
+    if (q) {
+      const kw = q.toLowerCase();
+      list = list.filter(m =>
+        [m.last_name, m.first_name, m.last_name_kana, m.first_name_kana,
+         m.guardian_last, m.guardian_first].some(v => v?.toLowerCase().includes(kw))
+      );
+    }
+    if (statusFilter === 'expired') {
+      list = list.filter(m => m.expiry_date && m.expiry_date < today);
+    } else if (statusFilter === 'expiring') {
+      list = list.filter(m => m.expiry_date && m.expiry_date >= today && m.expiry_date <= in7days);
+    } else if (statusFilter === 'active') {
+      list = list.filter(m => !m.expiry_date || m.expiry_date >= today);
+    }
+    return list;
+  }, [allMembers, q, statusFilter]);
 
   const handleDelete = async (id: number, name: string) => {
     if (!confirm(`${name} を削除しますか？`)) return;
     await fetch(`/api/members/${id}`, { method: 'DELETE' });
-    fetch_();
+    loadAll();
   };
 
   return (
