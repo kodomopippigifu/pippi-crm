@@ -6,7 +6,11 @@ const pool = new Pool({
   max: 10,
 });
 
+let schemaInitialized = false;
+
 export async function initSchema() {
+  if (schemaInitialized) return;
+  schemaInitialized = true;
   await pool.query(`
     CREATE TABLE IF NOT EXISTS children (
       id SERIAL PRIMARY KEY,
