@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: 'こどもの国ピッピ 顧客管理',
   description: '会員管理システム',
   manifest: '/manifest.json',
+  icons: {
+    apple: '/apple-touch-icon.png',
+    icon: '/icon-512.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

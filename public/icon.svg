@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 背景 -->
+  <rect width="512" height="512" rx="110" fill="#fce7f3"/>
+
+  <!-- 花びら（桜） -->
+  <g transform="translate(256,256)">
+    <!-- 花びら5枚 -->
+    <ellipse cx="0" cy="-90" rx="38" ry="62" fill="#f9a8d4" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-90" rx="38" ry="62" fill="#f9a8d4" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-90" rx="38" ry="62" fill="#f9a8d4" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-90" rx="38" ry="62" fill="#f9a8d4" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-90" rx="38" ry="62" fill="#f9a8d4" transform="rotate(288)"/>
+
+    <!-- 花びらの内側（グラデーション風） -->
+    <ellipse cx="0" cy="-85" rx="22" ry="45" fill="#fbcfe8" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-85" rx="22" ry="45" fill="#fbcfe8" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-85" rx="22" ry="45" fill="#fbcfe8" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-85" rx="22" ry="45" fill="#fbcfe8" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-85" rx="22" ry="45" fill="#fbcfe8" transform="rotate(288)"/>
+
+    <!-- 中心 -->
+    <circle r="42" fill="#ec4899"/>
+    <circle r="30" fill="#f472b6"/>
+
+    <!-- 中心のドット -->
+    <circle cx="0" cy="-16" r="5" fill="#fce7f3"/>
+    <circle cx="15" cy="8" r="5" fill="#fce7f3"/>
+    <circle cx="-15" cy="8" r="5" fill="#fce7f3"/>
+  </g>
+</svg>
