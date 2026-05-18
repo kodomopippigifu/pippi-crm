@@ -5,6 +5,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'こどもの国ピッピ 顧客管理',
   description: '会員管理システム',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
