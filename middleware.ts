@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  if (pathname.startsWith('/register') || pathname.startsWith('/api/auth')) {
+  if (pathname.startsWith('/register') || pathname.startsWith('/api/auth') || pathname.startsWith('/api/line-webhook')) {
     return NextResponse.next();
   }
 
